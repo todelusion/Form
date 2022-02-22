@@ -1,5 +1,5 @@
 <template>
-  <div
+  <form
     class="mx-20 mt-36 box-border max-w-[768px] border-2 border-black bg-white px-20 py-24 font-bold duration-150 hover:scale-105 lg:mx-auto"
   >
     <!-- email -->
@@ -40,9 +40,11 @@
         <option value="designer">UI/UX Desinger</option>
       </select>
       <div class="mt-10 flex items-center text-lg text-black">
-        <input type="checkbox" class="h-4 w-4" />
-        <label class="ml-4 text-sm uppercase tracking-wider"
-          >accept terms and conditions</label
+        <label
+          class="flex cursor-pointer select-none items-center text-sm uppercase tracking-wider"
+          ><input type="checkbox" class="h-4 w-4" /><span class="ml-5"
+            >accept terms and conditions</span
+          ></label
         >
       </div>
     </div>
@@ -53,11 +55,15 @@
       >
         your data
       </h2>
-      <div v-for="email in emails" :key="email" class="mt-4">
-        {{ email }}
+      <div
+        v-for="email in emails"
+        :key="email"
+        class="mx-4 mt-4 inline-block cursor-pointer border-2 border-black px-3 hover:bg-black hover:text-white"
+      >
+        <span @click="deleteItem(email)">{{ email }}</span>
       </div>
     </div>
-  </div>
+  </form>
 </template>
 
 <script>
@@ -80,6 +86,9 @@ export default {
           this.isSame = true;
         }
       }
+    },
+    deleteItem(email) {
+      this.emails = this.emails.filter(item => email !== item);
     },
   },
 };
